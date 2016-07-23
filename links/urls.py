@@ -17,7 +17,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from .links import home
+from .views import home
 
 urlpatterns = [
     url(r'^$', home, name='home'),
