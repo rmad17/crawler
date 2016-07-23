@@ -1,5 +1,8 @@
-"""crawler URL Configuration
+# Copyright © 2016 rmad
+#
+# Distributed under terms of the MIT license.
 
+"""
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.9/topics/http/urls/
 Examples:
@@ -13,10 +16,9 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
-from django.contrib import admin
+from django.conf.urls import url
+from .links import home
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^links/', include('links.urls')),
+    url(r'^$', home, name='home'),
 ]
