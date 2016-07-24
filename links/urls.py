@@ -1,6 +1,8 @@
-# Copyright © 2016 rmad
+# -*- coding: utf-8 -*-
 #
+# Copyright © 2016 rmad
 # Distributed under terms of the MIT license.
+
 
 """
 The `urlpatterns` list routes URLs to views. For more information please see:
