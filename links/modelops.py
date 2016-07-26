@@ -11,5 +11,7 @@ from .models import PageData
 
 def save_page_links(page_url, page_links):
     if not page_links:
-        page_data = PageData(page_url=page_url, page_links=page_links)
-        page_data.save()
+        return None
+    page_data = PageData(page_url=page_url, page_links=page_links)
+    page_data.save()
+    return page_data
