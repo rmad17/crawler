@@ -12,7 +12,7 @@ import re
 
 # app imports
 from celery.decorators import task
-from .modelops import save_page_links
+from .modelops import save_page_links, get_page_link_by_page_url
 
 # 3rd party imports
 import requests
@@ -20,16 +20,19 @@ from bs4 import BeautifulSoup
 
 
 @task(name="fetch_links_task")
-def fetch_links_task(page_url):
+def fetch_links_task(page_url, limit=10):
     links = []
     print("Fetching from: ", page_url)
     r = requests.get(page_url)
     soup = BeautifulSoup(r.text)
     for link in soup.find_all('a'):
         if is_valid_url(link.get('href')):
-            links.append(link.get('href'))
+            if not get_page_link_by_page_url(link.get('href')):  # This should go to redis # noqa
+                links.append(link.get('href'))
+                limit -= 1
+                if limit > 0:
+                    fetch_links_task(link.get('href'), limit)
     dbop = save_page_links(page_url, links)
-    print("dbop:", dbop)
     return links
 
 

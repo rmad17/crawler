@@ -27,4 +27,3 @@ def get_links(request):
 
 def process_celery_task(page_url, limit):
     results = fetch_links_task.delay(page_url)
-    print(results)
